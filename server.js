@@ -39,4 +39,4 @@ app.use('/categorys', categoryRouter)
 const questionRouter = require('./routes/questions')
 app.use('/questions', questionRouter)
 
-app.listen(process.env.PORT || 3000, ()=> console.log('Server Started'))
+app.listen(process.env.PORT || 80, ()=> console.log('Server Started'))

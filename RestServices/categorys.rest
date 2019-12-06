@@ -3,7 +3,7 @@
 GET http://localhost:3000/categorys
 ###
 //Get ONE Category
-Get http://localhost:3000/categorys/5de253bc06bc7849c0ad9a28
+Get http://localhost:3000/categorys/5de29a127ee2cb628c185e0d
 ###
 //Post ONE Category
 POST http://localhost:3000/categorys

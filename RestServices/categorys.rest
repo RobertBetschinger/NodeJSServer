@@ -1,0 +1,31 @@
+//Categorys
+//Get All Categorys
+GET http://localhost:3000/categorys
+###
+//Get ONE Category
+Get http://localhost:3000/categorys/5de253bc06bc7849c0ad9a28
+###
+//Post ONE Category
+POST http://localhost:3000/categorys
+Content-Type: application/json
+
+{
+    "category_id":"1.0",
+    "category_name":"IT-Security",
+    "subcategory_id":"1.02",
+    "subcategory_name":"Hash-Funktionen"
+}
+###
+//Patch ONE Category
+PATCH http://localhost:3000/categorys/5de29a127ee2cb628c185e0d
+Content-Type: application/json
+
+{
+    "subcategory_id":"1.02",
+    "subcategory_name":"Hash Funktionen"
+}
+###
+//Delete One Category
+DELETE  http://localhost:3000/categorys/5de29a317ee2cb628c185e0f
+###
+

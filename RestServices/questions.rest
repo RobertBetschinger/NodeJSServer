@@ -1,0 +1,41 @@
+///Fragen
+###
+///Get ALL
+GET http://localhost:3000/questions?filters[category_id]=1
+###
+///Get ONE
+GET http://localhost:3000/questions
+###
+///Post ONE
+POST http://localhost:3000/questions
+Content-Type: application/json
+
+{
+    "question":"Wer ist der beste IT-SEC Professor",
+    "category_id":"1.0",
+    "category_name":"IT-Security",
+    "subcategory_id":"1.01",
+    "subcategory_name":"Kryptoanalyse",
+    "answer":"Pppppp pppp Pernul",
+    "boolean":"false",
+    "answer1":"Leist",
+    "boolean1":"true",
+    "answer2":"Kesdogan",
+    "boolean2":"true",
+    "answer3":"Supportlik",
+    "boolean3":"true"
+}
+###
+///Patch ONE
+PATCH http://localhost:3000/questions/5de19d0be9b69743f806f816
+Content-Type: application/json
+
+{
+    "question":"Das ist eine gepatchte Frage",
+    "category_name":"Die erste gepatchte",
+    "answer3":"Das sollte jetzt eine neue antwort sein",
+    "boolean":"false"
+}
+###
+//Deleting ONE
+DELETE  http://localhost:3000/questions/5de19d0be9b69743f806f816

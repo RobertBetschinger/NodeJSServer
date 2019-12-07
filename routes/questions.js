@@ -2,18 +2,35 @@ const express = require('express')
 const router = express.Router()
 const Question = require('../models/question')
 
-//Get All
+router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+
+//checks for query params, gets all if none given
 router.get('/', async (req, res) => {
   try {
-	//res.send("hello"); 
- 
-	Question.find({}, (err, questions) => {
-            res.json(questions)
-        })  
-  } catch (err) {
-    res.status(500).json({ messsage: err.message })
+    if (req.query.subcategory_name !== undefined && req.query.category_name !== undefined) {
+    var nameSC = req.query.subcategory_name; 
+    var nameC = req.query.category_name;  
+
+    let articles = await Question.find({subcategory_name: nameSC, category_name: nameC}).exec();
+    res.json(articles); 
+    //res.send(nameSC); 
+  } else {
+    Question.find({}, (err, categories) => {
+      res.json(categories)
+  })  
+
+  }
+
+  } catch(err) {
+    res.status(404).json({ message: err.message })
   }
 })
+
 
 //Get ONE
 router.get('/:id',getQuestion, (req,res) =>{

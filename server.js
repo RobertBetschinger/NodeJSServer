@@ -25,9 +25,6 @@ db.once('open', function () {
 
 });
 
-
-
-
 // Wenn neues Schema--> überarbeiten
 app.use(express.json())
 

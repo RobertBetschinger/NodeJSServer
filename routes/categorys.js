@@ -44,7 +44,6 @@ router.post('/',async (req,res) => {
           res.status(400).json(err.message)
   }
 })
-
 //Patch ONE
 //Updating One
 router.patch('/:id',getCategory, async(req,res)=>{
@@ -97,7 +96,9 @@ if(category == null){
   return res.status(500).json({message: err.message})
 }
 res.category = category
-next()
+res.header("Access-Control-Allow-Origin", "*");
+res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+next();
 }
 
 module.exports = router 

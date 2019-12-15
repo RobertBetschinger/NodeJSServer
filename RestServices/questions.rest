@@ -1,7 +1,7 @@
 ///Fragen
 ###
 ///Get ALL
-GET http://localhost:3000/questions?filters[category_id]=1
+GET http://localhost:3000/questions
 ###
 ///Get ONE
 GET http://localhost:3000/questions

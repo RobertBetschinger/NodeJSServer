@@ -31,9 +31,10 @@ app.use(express.json())
 const categoryRouter = require('./routes/categorys')
 app.use('/categorys', categoryRouter)
 
-
-
 const questionRouter = require('./routes/questions')
 app.use('/questions', questionRouter)
+
+const statsRouter = require ('./routes/stats')
+app.use('/stats', statsRouter)
 
 app.listen(process.env.PORT || 80, ()=> console.log('Server Started'))

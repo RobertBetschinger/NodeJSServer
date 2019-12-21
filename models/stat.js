@@ -5,11 +5,13 @@ const statSchema = new mongoose.Schema({
 		type: Number,required:true},
 	category_name:String,
 
-	subcategories:[{
+    subcategories:[{
 		subcategory_name: String, 
         subcategory_id:Number,
-        aCorr : Number, 
-        aFalse: Number
+        aCorr: {
+            type:Number,required:true}, 
+        aFalse: {
+            type:Number,required:true},
 	}]
 
 })

@@ -6,14 +6,12 @@ GET http://localhost:3000/categorys
 Get http://localhost:3000/categorys/5de29a127ee2cb628c185e0d
 ###
 //Post ONE Category
-POST http://localhost:3000/categorys
+POST https://projektseminarlfrb.herokuapp.com/categorys
 Content-Type: application/json
 
 {
-    "category_id":"1.0",
-    "category_name":"IT-Security",
-    "subcategory_id":"1.02",
-    "subcategory_name":"Hash-Funktionen"
+    "category_id":"18.0",
+    "category_name":"TesTEST"
 }
 ###
 //Patch ONE Category

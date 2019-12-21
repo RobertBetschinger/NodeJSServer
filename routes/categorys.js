@@ -59,11 +59,6 @@ router.patch('/:id',getCategory, async(req,res)=>{
   if(req.body.subcategory_id != null&& req.body.subcategory_name!=null){
     var sub_cato={subcategory_id:req.body.subcategory_id, subcategory_name:req.body.subcategory_name}
     res.category.sub_categories.push(sub_cato);
-    //res.category.sub_categories.push(req.body.subcategory_id)
-   // var x= res.category.sub_categories.length()
-   //var x= { $size: <res.body.sub_categories> }
-   //res.body.sub_categories.count()
-    //res.category.sub_categories[x].subcategory_id = req.body.subcategory_id
   }
 
   try{

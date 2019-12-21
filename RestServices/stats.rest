@@ -1,2 +1,11 @@
 //Get all Stats
-GET https://projektseminarlfrb.herokuapp.com/categorys
+GET https://projektseminarlfrb.herokuapp.com/stats
+
+//Patch ONE Category
+PATCH https://projektseminarlfrb.herokuapp.com/stats/5dfe9a3d1c9d440000281c4a
+Content-Type: application/json
+
+{
+    "aCorr":"1",
+    "aFalse":"4"
+}

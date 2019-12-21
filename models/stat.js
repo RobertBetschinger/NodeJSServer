@@ -5,7 +5,7 @@ const statSchema = new mongoose.Schema({
 		type: Number,required:true},
 	category_name:String,
 
-	sub_categories:[{
+	subcategories:[{
 		subcategory_name: String, 
         subcategory_id:Number,
         aCorr : Number, 

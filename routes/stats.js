@@ -10,104 +10,102 @@ router.use(function(req, res, next) {
 });
 
 
-//checks for query params, gets all if none given
+//checks for query params, gets all if none given WORKS
 router.get('/', async (req, res) => {
-  try {
-    if (req.query.subcategory_name !== undefined && req.query.category_name !== undefined) {
-    var nameSC = req.query.subcategory_name; 
-    var nameC = req.query.category_name;  
-
-    let articles = await Stat.find({subcategory_name: nameSC, category_name: nameC}).exec();
-    res.json(articles); 
-    //res.send(nameSC); 
-  } else {
-    Stat.find({}, (err, stats) => {
-      res.json(stats)
-  })  
-}
-  } catch(err) {
-    res.status(404).json({ message: err.message })
+    try {
+      if (req.query.subcategory_name !== undefined && req.query.category_name !== undefined) {
+      var nameSC = req.query.subcategory_name; 
+      var nameC = req.query.category_name;  
+  
+      let articles = await Stat.find({subcategory_name: nameSC, category_name: nameC}).exec();
+      res.json(articles); 
+      //res.send(nameSC); 
+    } else {
+      Stat.find({}, (err, stats) => {
+        res.json(stats)
+    })  
   }
-})
-
-
-//Get ONE
-router.get('/:id',getStat, (req,res) =>{
-  res.json(res.question)
-})
-
-//Post ONE Stat
-router.post('/',async (req,res) => {
-    const stat = new Stat({
-        category_id: req.body.category_id,
-        category_name:req.body.category_name,
-        sub_categories:[{
-          subcategory_id:req.body.subcategory_id,
-          subcategory_name:req.body.subcategory_name, 
-          aCorr:req.body.aCorr, 
-          aFalse:req.body.aFalse
-          }]
-    })
-    try{
-        const newStat = await stat.save()
-        res.status(201).json(newcategory)
-    }
-    catch(err){
-            res.status(400).json(err.message)
+    } catch(err) {
+      res.status(404).json({ message: err.message })
     }
   })
-
-
-  //Patch ONE
-  //Updating One
-  router.patch('/:id',getStat, async(req,res)=>{
-    if(req.body.category_name != null){
-        res.stat.category_name = req.body.category_name
-    }
-    if(req.body.category_id != null){
-      res.stat.category_id = req.body.category_id
-    }
-    if(req.body.subcategory_id != null&& req.body.subcategory_name!=null){
-      var sub_cato={subcategory_id:req.body.subcategory_id, subcategory_name:req.body.subcategory_name, aCorr:req.body.aCorr, aFalse:req.body.aFalse}
-      res.category.sub_categories.push(sub_cato);
-    }
   
-    try{
-      const upddatedcategory = await res.category.save()
-      res.json(upddatedcategory)
-    }
+  
+  //Get ONE Works
+  router.get('/:id',getStat, (req,res) =>{
+    res.json(res.stat)
+  })
+  
+  //Post ONE Stat Works
+  router.post('/',async (req,res) => {
+      const stat = new Stat({
+          category_id: req.body.category_id,
+          category_name:req.body.category_name,
+            subcategory_id:req.body.subcategory_id,
+            subcategory_name:req.body.subcategory_name, 
+            aCorr:req.body.aCorr, 
+            aFalse:req.body.aFalse
+      })
+      try{
+          const newStat = await stat.save()
+          res.status(201).json(newStat)
+      }
       catch(err){
-        res.status(400).json({message: err.message})
-    }
-  })
+              res.status(400).json(err.message)
+      }
+    })
   
-  //Deleting ONE
-  router.delete('/:id', getStat,async (req,res)=>{
+  
+    //Patch ONE
+    //Updating One
+    router.patch('/:id',getStat, async(req,res)=>{
+      if(req.body.category_name != null){
+          res.stat.category_name = req.body.category_name
+      }
+      if(req.body.category_id != null){
+        res.stat.category_id = req.body.category_id
+      }
+      if (req.body.aCorr != null && req.body.aFalse != null) {
+        res.stat.aCorr = req.body.aCorr
+        res.stat.aFalse = req.body.aFalse
+      }
+      try{
+        const upddatedStat = await res.stat.save()
+        res.json(upddatedStat)
+      }
+        catch(err){
+          res.status(400).json({message: err.message})
+      }
+    })
+    
+    //Deleting ONE
+    router.delete('/:id', getStat,async (req,res)=>{
+        try{
+            await res.stat.remove()
+            res.json({message: 'Deleted Question'})
+        }catch(err){
+            res.status(500).json({message: err,message})
+        }
+      })
+    
+    
+    //Middleware for ID
+    async function getStat(req,res,next){
+      let stat
     try{
-        await res.category.remove()
-        res.json({message: 'Deleted Question'})
-    }catch(err){
-        res.status(500).json({message: err,message})
+    stat = await Stat.findById(req.params.id)
+    if(stat == null || stat == undefined){
+      //404 for Coudnt find anything
+      return res.status(404).json({message: 'Cannot find stat'})
     }
-  })
-  
-  
-  //Middleware for ID
-  async function getStat(req,res,next){
-    let stat
-  try{
-  stat = await Stat.findById(req.params.id)
-  if(stat == null){
-    //404 for Coudnt find anything
-    return res.status(404).json({message: 'Cannot find stat'})
-  }
-  }catch(err){
-    return res.status(500).json({message: err.message})
-  }
-  res.stat = stat
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-  }
+    }catch(err){
+      return res.status(500).json({message: err.message})
+    }
+    res.stat = stat
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+    }
+   
 
 module.exports = router 

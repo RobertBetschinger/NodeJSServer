@@ -87,7 +87,23 @@ router.get('/', async (req, res) => {
             res.status(500).json({message: err,message})
         }
       })
-    
+
+    router.delete('/', async (req, res) => {
+      try{
+        if(req.body.category_id !== undefined && req.body.subcategory_id !== undefined) {
+          var nameC = req.body.category_id;
+          var nameS = req.body.subcategory_id;
+          await Stat.deleteMany({category_id : nameC, subcategory_id:nameS } )
+          res.json({message: 'Deleted Stat'})
+        } else if ( req.body.category_id !== undefined) {
+          var nameC = req.body.category_id;
+          await Stat.deleteMany({category_id : nameC } )
+          res.json({message: 'Deleted Stat'})
+        }
+      }catch (err) {
+        res.status(500).json({ message: err, message })
+      }
+    })
     
     //Middleware for ID
     async function getStat(req,res,next){

@@ -119,6 +119,13 @@ router.patch('/:id',getQuestion, async(req,res)=>{
   if(req.body.boolean3 != null){
     res.question.answers[3].trueOrFalse = req.body.boolean3
   }
+  if(req.body.triggerQuestion !=null){
+    res.question.triggerQuestion = req.body.triggerQuestion
+  }
+  if(req.body.triggerType !=null){
+    res.question.triggerType = req.body.triggerType
+  }
+
   try{
           const updatedQuestion = await res.question.save()
           res.json(updatedQuestion)

@@ -46,6 +46,8 @@ router.post('/',async (req,res) => {
       category_name:req.body.category_name,
       subcategory_id:req.body.subcategory_id,
       subcategory_name:req.body.subcategory_name,
+      triggerQuestion:req.body.triggerQuestion,
+      triggerType:req.body.triggerType,
       answers:[{
         aText:req.body.answer,
         trueOrFalse:req.body.boolean
@@ -115,7 +117,7 @@ router.patch('/:id',getQuestion, async(req,res)=>{
     res.question.answers[2].trueOrFalse = req.body.boolean2
   }
   if(req.body.boolean3 != null){
-    res.question.answers[3].trueOrFalse = req.body.boolean2
+    res.question.answers[3].trueOrFalse = req.body.boolean3
   }
   try{
           const updatedQuestion = await res.question.save()

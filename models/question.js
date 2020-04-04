@@ -11,7 +11,8 @@ const questionSchema = new mongoose.Schema({
 			subcategory_id:{
 				type:Number,required:true},
 			subcategory_name:String, 
-			
+			triggerQuestion:Boolean, required:false,
+			triggerType:String,required:false,
 			answers : [{
 				aText: String, 
 				trueOrFalse:Boolean

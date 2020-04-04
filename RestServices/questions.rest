@@ -16,6 +16,8 @@ Content-Type: application/json
     "category_name":"IT-Security",
     "subcategory_id":"1.01",
     "subcategory_name":"Kryptoanalyse",
+    "triggerQuestion":true,
+    "triggerType":"Nachdenken",
     "answer":"Pppppp pppp Pernul",
     "boolean":"false",
     "answer1":"Leist",
